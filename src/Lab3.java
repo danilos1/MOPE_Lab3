@@ -17,7 +17,7 @@ public class Lab3 {
         int Ymin = 200 + getAvg(new int[]{xMinMax[0], xMinMax[2], xMinMax[4]});
         int Ymax = 200 + getAvg(new int[]{xMinMax[1], xMinMax[3], xMinMax[5]});
 
-        System.out.println("Ymin ÷ Ymax: "+Ymin+" to "+Ymax);
+        System.out.println("from Ymin = "+Ymin+" to Ymax = "+Ymax);
 
         ThreeFactorsExperiment experiment = new ThreeFactorsExperiment(xMinMax, Ymin, Ymax);
         experiment.printMatrixOfPlanning();

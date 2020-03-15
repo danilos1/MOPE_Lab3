@@ -183,7 +183,7 @@ public class ThreeFactorsExperiment {
         };
 
         System.out.println("============================Test by criterion Cohrena============================");
-        System.out.println("1. Statical dispersions S²{Yi} (i=1, N) on rows: ");
+        System.out.println("1. Statical dispersions S2{Yi} (i=1, N) on rows: ");
 
         S2y = new double[N];
         for (int i = 0; i < y.length; i++) {
@@ -192,14 +192,14 @@ public class ThreeFactorsExperiment {
                 s += (y[i][j] - Yavg[i])*(y[i][j] - Yavg[i]);
             }
             S2y[i] = s/(m-1);
-            System.out.printf("  S²{Y%d} = %.3f\n",i+1,S2y[i]);
+            System.out.printf("  S2{Y%d} = %.3f\n",i+1,S2y[i]);
         }
         S2max = Arrays.stream(S2y).max().getAsDouble();
 
-        System.out.printf("2. S²max{Yi} = %.3f\n",S2max);
+        System.out.printf("2. S2max{Yi} = %.3f\n",S2max);
 
         double G = S2max/Arrays.stream(S2y).sum();
-        System.out.printf("3. G = S²max / Σ S²{Yi} = %.3f\n",G);
+        System.out.printf("3. G = S2max / sum(S2{Yi}) = %.3f\n",G);
 
         int f1 = m - 1, f2 = N;
         System.out.println("4. f1 = "+f1+", f2 = "+f2+", q = "+q);
@@ -211,7 +211,7 @@ public class ThreeFactorsExperiment {
         if (G < Gkr)
             System.out.println("G < Gkr => dispersion is uniform with q="+q);
         else {
-            System.out.println("G ≥ Gkr => dispersion is not uniform with q=" + q+". So, m = m + 1 = "+(++m)+"\n");
+            System.out.println("G >= Gkr => dispersion is not uniform with q=" + q+". So, m = m + 1 = "+(++m)+"\n");
             generateMatrixOfPlanning(m);
             printMatrixOfPlanning();
             findNormalizedCoefficients();
@@ -230,7 +230,7 @@ public class ThreeFactorsExperiment {
         double[] t = new double[N];
         double q = 0.05;
 
-        System.out.println("1. S²{βi} = "+S2beta+" => S{βi} = "+Math.sqrt(S2beta));
+        System.out.println("1. S2{betai} = "+S2beta+" => S{betai} = "+Math.sqrt(S2beta));
         System.out.println("2. Beta coefficients: ");
         for (int i = 0; i < N; i++) {
             double sum = .0;
@@ -239,7 +239,7 @@ public class ThreeFactorsExperiment {
             }
             beta[i] /= 4.0;
             t[i] = Math.abs(beta[i]) / Math.sqrt(S2beta);
-            System.out.println("  β"+i+" = "+beta[i]);
+            System.out.println("  beta"+i+" = "+beta[i]);
         }
 
         System.out.println("3. t-coefficients: ");
@@ -265,9 +265,10 @@ public class ThreeFactorsExperiment {
         System.out.printf("y = %+.5f%+.5f*x1%+.5f*x2%+.5f*x3\n\n", b[0], b[1], b[2], b[3]);
 
         y_ = new double[N];
+        System.out.println("Substitute the coded values of 'x' into the regression equation:");
         for (int i = 0, k = 0; i < N; i++) {
             y_[i] = b[0]+b[1]*x[0][i]+b[2]*x[1][i]+b[3]*x[2][i];
-            System.out.printf("Ŷ%d = %.3f\n",i+1,y_[i]);
+            System.out.printf("Y_%d = %.3f\n",i+1,y_[i]);
         }
     }
 
@@ -294,7 +295,7 @@ public class ThreeFactorsExperiment {
             sum+=(y_[i] - Yavg[i])*(y_[i] - Yavg[i]);
         }
         double S2ad = (double) m/(N-d)*sum;
-        System.out.println("1. S²ад = "+S2ad);
+        System.out.println("1. S2ад = "+S2ad);
 
         double Fp = S2ad/(Arrays.stream(S2y).sum()/N); // Fp = S²ад / S²в
         System.out.println("2. Fp = "+Fp);
@@ -304,7 +305,7 @@ public class ThreeFactorsExperiment {
         System.out.println("4. Select by f3, f4 and q = "+q+" table value Ft = "+Ft);
 
         if (Fp <= Ft)
-            System.out.println("Fp ≤ Ft => So, the equation is adequate to original with q = "+q);
+            System.out.println("Fp <= Ft => So, the equation is adequate to original with q = "+q);
         else
             System.out.println("Fp > Ft => So, the equation is inadequate to original with q = "+q);
 

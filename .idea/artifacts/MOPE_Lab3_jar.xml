@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="MOPE_Lab3:jar">
+    <output-path>D:/KPI/4/МОПЕ/labs/lab3</output-path>
+    <root id="archive" name="MOPE_Lab3.jar">
+      <element id="module-output" name="MOPE_Lab3" />
+    </root>
+  </artifact>
+</component>
